@@ -16,3 +16,19 @@ fail2ban_bantime: 3600
 fail2ban_findtime: 600
 fail2ban_maxretry: 5
 
+#sysctl
+sysctl_settings:
+  net.ipv4.ip_forward: 0
+  net.ipv6.conf.all.forwarding: 0
+
+  net.ipv4.tcp_syncookies: 1
+
+  net.ipv4.conf.allrp_filter: 1
+  net.ipv4.conf.default.rp_filter: 1
+
+  net.ipv4.conf.all.accept_redirects: 0
+  net.ipv4.conf.default.accept_redirects: 0
+  net.ipv4.conf.all.send_redirects: 0
+
+  kernel.randomize_va_space: 2
+
