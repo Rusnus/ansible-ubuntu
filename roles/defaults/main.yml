@@ -32,3 +32,11 @@ sysctl_settings:
 
   kernel.randomize_va_space: 2
 
+  kernel.dmesg.restrict: 1
+  kernel.kptr_restrict: 2
+
+  fs.suid_dumpable: 0
+
+unattended_upgrades_enabled: true
+unattended_upgrades_reboot: false
+
