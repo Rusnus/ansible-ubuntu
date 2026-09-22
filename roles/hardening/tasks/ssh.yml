@@ -1,0 +1,36 @@
+---
+
+- name: Install OpenSSH server
+  apt:
+    name: openssh-server
+    state: present
+    update_cache: true
+
+- name: Backup original sshd_config
+  copy:
+    src: /etc/ssh/sshd_config
+    dest: "/etc/ssh/sshd_config.bak.{{ ansible_date_time.date }}"
+    remote_src: true
+    force: false
+
+- name: Deploy hardened sshd_config
+  template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: '0600'
+    validate: /usr/sbin/sshd -t -f %s
+  notify: Restart sshd
+
+- name: Write SSH login banner
+  copy:
+    dest: /etc/ssh/banner
+    content: |
+      **********
+      Authorized access only. All connections are logged and monitored.
+      Unauthorized access will be prosecuted to the full extent of the law.
+      **********
+    owner: root
+    group: root
+    mode: '0644'
