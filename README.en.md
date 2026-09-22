@@ -8,3 +8,8 @@ Covers SSH, firewall (ufw), fail2ban, sysctl kernel parameters, and automatic se
 - Ansible 2.12+
 - Target: Ubuntu 22.04 or 24.04
 - SSH access to the target server
+
+## What it does
+| Module | What gets hardened |
+|---|---|
+| `ssh.yml` | Disables root login, password auth, weak ciphers; adds login banner |
