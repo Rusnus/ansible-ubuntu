@@ -1,4 +1,4 @@
--name: Ubuntu server hardening
+- name: Ubuntu server hardening
   hosts: servers
   become: true
   gather_facts: true

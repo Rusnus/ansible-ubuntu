@@ -1,15 +1,15 @@
 ---
 
--name: Include SSH hardening tasks
-  include_tasks: ssh.yml
-  tags: ssh
+- name: Include SSH hardening tasks
+   include_tasks: ssh.yml
+   tags: ssh
 
--name: Include firewall tasks
-  include_tasks: firewall.yml
-  tags: firewall
+- name: Include firewall tasks
+   include_tasks: firewall.yml
+   tags: firewall
 
--name: Include sysctl and OS hardening tasks
-  include_tasks: sysctl.yml
-  tags: sysctl
+- name: Include sysctl and OS hardening tasks
+   include_tasks: sysctl.yml
+   tags: sysctl
 
 
