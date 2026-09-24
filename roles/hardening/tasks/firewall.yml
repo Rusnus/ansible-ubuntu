@@ -1,0 +1,54 @@
+---
+
+- name: Install ufw
+  apt:
+    name: ufw
+    state: present
+
+- name: Set default incoming policy to deny
+  ufw:
+    default: deny
+    direction: incoming
+
+- name: Set default outgoing policy to allow
+  ufw:
+    default: allow
+    direction: outgoing
+
+- name: Allow configured ports
+  ufw:
+    rule: allow
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+    comment: "{{ item.comment }}"
+  loop: "{{ ufw_allowed_ports }}"
+
+- name: Rate limit SSH to prevent brute-force
+  ufw:
+    rule: limit
+    port: "{{ ssh_port }}"
+    proto: tcp
+
+- name: Enable ufw
+  ufw:
+    state: enabled
+
+- name: Install fail2ban
+  apt:
+    name: fail2ban
+    state: present
+
+- name: Deploy fail2ban jail.local
+  template:
+    src: jail.local.j2
+    dest: /etc/fail2ban/jail.local
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart fail2ban
+
+- name: Enable and start fail2ban
+  systemd:
+    name: fail2ban
+    enabled: true
+    state: started
