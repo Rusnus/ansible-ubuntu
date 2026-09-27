@@ -1,0 +1,10 @@
+---
+
+- name: Apply sysctl hardening parameters
+  sysctl:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+    sysctl_file: /etc/sysctl.d/99-hardening.conf
+    reload: true
+  loop: "{{ sysctl_settings | dict2items }}"
