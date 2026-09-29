@@ -8,3 +8,41 @@
     sysctl_file: /etc/sysctl.d/99-hardening.conf
     reload: true
   loop: "{{ sysctl_settings | dict2items }}"
+
+# Limits
+- name: Deploy resource limits
+  copy:
+    dest: /etc/security/limits.d/99-hardening.conf
+    content: |
+      # Managed by Ansible - ansible-ubuntu-hardening
+      # Protection against fork bobms
+      # soft nproc 1000
+      # hard nproc 2000
+      # soft nofile 65536
+      # hard nofile 65536
+      # soft core 0
+      # hard core 0
+      root soft nproc 2000
+      root hard nproc 4000
+    owner: root
+    group: root
+    mode: '0644'
+
+#  Disable unused kernel modules
+- name: Disable uncommon filesystems and protocols
+  copy:
+    dest: /etc/modprobe.d/hardening.conf
+    content:
+      # Managed by Ansible - ansible-ubuntu-hardening
+      install cramfs /bin/false
+      install freevxfs /bin/false
+      install jffs2 /bin/false
+      install hfs /bin/false
+      install hfsplus /bin/false
+      install dccp /bin/false
+      install sctp /bin/false
+      install rds /bin/false
+      install tipc /bin/false
+    owner: root
+    group: root
+    mode: '0644'
