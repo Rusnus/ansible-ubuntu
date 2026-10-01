@@ -46,3 +46,12 @@
     owner: root
     group: root
     mode: '0644'
+
+# unattended-upgrades
+- name: Install unattended-upgrades
+  apt:
+    name:
+      - unattended-upgrades
+      - apt-listchanges
+    state: present
+  when: unattended_upgrades_enabled
