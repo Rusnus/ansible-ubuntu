@@ -13,3 +13,4 @@ Covers SSH, firewall (ufw), fail2ban, sysctl kernel parameters, and automatic se
 | Module | What gets hardened |
 |---|---|
 | `ssh.yml` | Disables root login, password auth, weak ciphers; adds login banner |
+| `firewall.yml` | ufw default-deny, SSH rate limiting, fail2ban |
