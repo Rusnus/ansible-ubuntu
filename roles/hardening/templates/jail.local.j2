@@ -1,0 +1,16 @@
+# Managed by Ansible - ansible-ubuntu-hardening
+# {{ ansible_managed }}
+
+[DEFAULT]
+bantime = {{ fail2ban_bantime }}
+findtime = {{ fail2ban_findtime }}
+maxretry = {{ fail2ban_maxretry }}
+backend = systemd
+banaction = ufw
+
+[sshd]
+enabled	= true
+port	= {{ ssh_port }}
+filter	= sshd
+logpath	= /var/log/auth.log
+maxretry = {{ fail2ban_maxretry }}
