@@ -10,3 +10,14 @@ PermitEmptyPasswords no
 ChallengeResponseAuthentication no
 KbdInteractiveAuthentication no
 UsePAM yes
+
+# Session hardening
+X11Forwarding no
+AllowTcpForwarding no
+AllowAgentForwarding no
+PermitUserEnvironment no
+ClientAliveInterval {{ ssh_client_alive_interval }}
+ClientAliveCountMax {{ ssh_client_alive_count_max }}
+LoginGraceTime 30
+MaxAuthTries {{ ssh_max_auth_tries }}
+MaxSessions 5
