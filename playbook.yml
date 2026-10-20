@@ -1,7 +1,9 @@
+---
+
 - name: Ubuntu server hardening
   hosts: servers
   become: true
   gather_facts: true
 
- roles:
-    - hardening
+  roles:
+   - hardening
