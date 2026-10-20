@@ -8,8 +8,7 @@ ssh_client_alive_interval: 300
 ssh_client_alive_count_max: 2
 
 #ufw
-ufw_allowed_ports:
-  - { port: "{{ ssh_port }}", proto: tcp, comment: SSH }
+ufw_allowed_ports: []
 
 #fail2ban
 fail2ban_bantime: 3600
@@ -23,7 +22,7 @@ sysctl_settings:
 
   net.ipv4.tcp_syncookies: 1
 
-  net.ipv4.conf.allrp_filter: 1
+  net.ipv4.conf.all.rp_filter: 1
   net.ipv4.conf.default.rp_filter: 1
 
   net.ipv4.conf.all.accept_redirects: 0
@@ -32,7 +31,7 @@ sysctl_settings:
 
   kernel.randomize_va_space: 2
 
-  kernel.dmesg.restrict: 1
+  kernel.dmesg_restrict: 1
   kernel.kptr_restrict: 2
 
   fs.suid_dumpable: 0
